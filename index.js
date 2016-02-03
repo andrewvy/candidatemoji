@@ -30,6 +30,7 @@ stream.on('tweet', function(tweet) {
   if (Config.user_ids.indexOf(tweet.user.id) > -1) {
     var tweet_text = tweet.text;
     var splitText = tweet_text.split(" ");
+    var appliedEmoji = false;
 
     var emojifiedText = splitText.map(function(word) {
       var lowercaseWord = word.toLowerCase();
@@ -40,6 +41,7 @@ stream.on('tweet', function(tweet) {
       } else if (potentialEmojis.length == 1) {
         var emoji = Emojilib.lib[potentialEmojis[0]]["char"];
         if (emoji != null) {
+          appliedEmoji = true;
           return emoji + " ";
         } else {
           return word;
@@ -49,12 +51,17 @@ stream.on('tweet', function(tweet) {
         var emoji = Emojilib.lib[randomEmoji]["char"];
 
         if (emoji != null) {
+          appliedEmoji = true;
           return emoji + " ";
         } else {
           return word;
         }
       }
     }).join(' ');
+
+    if (!appliedEmoji) {
+      return;
+    }
 
     console.log(tweet_text);
     console.log(emojifiedText);
