@@ -30,7 +30,7 @@ stream.on('tweet', function(tweet) {
   if (Config.user_ids.indexOf(tweet.user.id) > -1) {
     if (tweet.retweeted_status) {
       return;
-    } else {
+    }
 
     var tweet_text = tweet.text;
     var splitText = tweet_text.split(" ");
