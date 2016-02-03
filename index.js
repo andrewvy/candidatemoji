@@ -61,6 +61,7 @@ stream.on('tweet', function(tweet) {
 
     T.post('statuses/update', { status: emojifiedText }, function(err, data, response) {
       // Handle errors.
+      console.log(err);
     });
   }
 });
