@@ -1,0 +1,16 @@
+{
+  "name": "candidatemoji",
+  "version": "1.0.0",
+  "description": "Candidates emojified on the Twitters.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "emojilib": "^2.0.0",
+    "ent": "^2.2.0",
+    "twit": "2.2.x"
+  },
+  "author": "Andrew Vy",
+  "license": "MIT"
+}
