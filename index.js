@@ -28,10 +28,6 @@ var stream = T.stream('statuses/filter', { follow: Config.user_ids });
 
 stream.on('tweet', function(tweet) {
   if (Config.user_ids.indexOf(tweet.user.id) > -1) {
-    if (tweet.retweeted_status) {
-      return;
-    }
-
     var tweet_text = tweet.text;
     var splitText = tweet_text.split(" ");
 
@@ -42,10 +38,21 @@ stream.on('tweet', function(tweet) {
       if (potentialEmojis.length == 0) {
         return word;
       } else if (potentialEmojis.length == 1) {
-        return Emojilib.lib[potentialEmojis[0]]["char"] + " ";
+        var emoji = Emojilib.lib[potentialEmojis[0]]["char"];
+        if (emoji != null) {
+          return emoji + " ";
+        } else {
+          return word;
+        }
       } else {
         var randomEmoji = potentialEmojis[Math.floor(Math.random() * potentialEmojis.length)];
-        return Emojilib.lib[randomEmoji]["char"] + " ";
+        var emoji = Emojilib.lib[randomEmoji]["char"];
+
+        if (emoji != null) {
+          return emoji + " ";
+        } else {
+          return word;
+        }
       }
     }).join(' ');
 
